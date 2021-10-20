@@ -1,15 +1,15 @@
 clc;
 clear all;
-InPath = 'G:\data\L1B\2018-06\18\H18\';
+InPath = 'æ–‡ä»¶è·¯å¾„';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%¶ÁÈ¡metadata.ncÖÐÊ±¼äÊý¾ÝºÍ¾µÏñµãÎ»ÖÃÊý¾Ý
-ncdisp(strcat(InPath,'metadata.nc')) %»ñÈ¡Ëù¶ÁÈ¡ncÎÄ¼þµÄ»ù±¾ÐÅÏ¢ 
+%è¯»å–metadata.ncä¸­æ—¶é—´æ•°æ®å’Œé•œåƒç‚¹ä½ç½®æ•°æ®
+ncdisp(strcat(InPath,'metadata.nc')) %èŽ·å–æ‰€è¯»å–ncæ–‡ä»¶çš„åŸºæœ¬ä¿¡æ¯ 
 % vardata = ncread(source,varname)
 source1 = strcat(InPath,'metadata.nc');
-ncdisp(strcat(InPath,'DDMs.nc')) %»ñÈ¡Ëù¶ÁÈ¡ncÎÄ¼þµÄ»ù±¾ÐÅÏ¢
+ncdisp(strcat(InPath,'DDMs.nc')) %èŽ·å–æ‰€è¯»å–ncæ–‡ä»¶çš„åŸºæœ¬ä¿¡æ¯
 source2 = strcat(InPath,'DDMs.nc');
 TrackID = '/000025/';
-Sat_number=ncreadatt(source1,TrackID,'PRN');   %%ÊôÐÔ¶Á·¨
+Sat_number=ncreadatt(source1,TrackID,'PRN');   %%å±žæ€§è¯»æ³•
 CodeDelayspsbp=double(ncreadatt(source1, TrackID,'CodeDelaySpacingSamplesBetweenPixels'));
 SamplingFre=ncreadatt(source1,TrackID,'SamplingFrequency');
 DopplerReso=ncreadatt(source1,TrackID,'DopplerResolution');
@@ -43,23 +43,23 @@ Time_ddm= ncread(source2,time2);
 DDM = ncread(source2,ddm);
 
 %a=find(SPPosition_Lon>=119 & SPPosition_Lon<=121.5);
-%b=find(SPPosition_Lat>=34.5 & SPPosition_Lat<=35.5);   % aºÍb×÷Îª¾­¶ÈºÍÎ³¶ÈµÄÖ¸Õë
+%b=find(SPPosition_Lat>=34.5 & SPPosition_Lat<=35.5);   % aå’Œbä½œä¸ºç»åº¦å’Œçº¬åº¦çš„æŒ‡é’ˆ
 
 a=find(SPPosition_Lon>=-31.88 & SPPosition_Lon<=-31.32);
-b=find(SPPosition_Lat>=34.5 & SPPosition_Lat<=36.5);   % aºÍb×÷Îª¾­¶ÈºÍÎ³¶ÈµÄÖ¸Õë
+b=find(SPPosition_Lat>=34.5 & SPPosition_Lat<=36.5);   % aå’Œbä½œä¸ºç»åº¦å’Œçº¬åº¦çš„æŒ‡é’ˆ
 %b=find(SPPosition_Lat>=33.7 & SPPosition_Lat<=36.75);
 lon_num=length(a);
 lat_num=length(b);
-c=intersect(a,b);     %Á½¸öÏòÁ¿µÄ½»¼¯
+c=intersect(a,b);     %ä¸¤ä¸ªå‘é‡çš„äº¤é›†
 [a1,a2]=size(c);
 DDM_F1=zeros(128,20,a1);
 %%%%%%%%%%%%%%%%%%%%%%%
-%%%%¼ÆËã¶àÆÕÀÕ¼°Ê±¼äÑÓ³Ù×ø±ê
+%%%%è®¡ç®—å¤šæ™®å‹’åŠæ—¶é—´å»¶è¿Ÿåæ ‡
 DelayinSecond=((Time_Delay*CodeDelayspsbp)/SamplingFre)*1023000;
 DopplerinHz=(Dopp_Delay *DopplerReso-TrackingoffDP)/1000;
 
 
-%% ÌáÈ¡ÐòÁÐÖÐÔÚ·¶Î§ÄÚµÄÊý¾Ý
+%% æå–åºåˆ—ä¸­åœ¨èŒƒå›´å†…çš„æ•°æ®
 for i=1:a1
    Time_F(i,1)=Time(c(i)); 
    SP_Position_X(i,1)=SPPosition_X(c(i),:);
@@ -72,7 +72,7 @@ for i=1:a1
    DDM_F1(:,:,i)=DDM(:,:,c(i));
 end
 
-%%Õý³£»¯DDM
+%%å½’ä¸€åŒ–DDM
 % Posi_maxxy=zeros(i,2);
 % for nor=1:i
 %    max_val=max(max(DDM_F1(:,:,nor)));
